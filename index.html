@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encyclopedia Terra: Lurraren Egitura eta Historia</title>
+    <!-- Fuentes científicas y modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- KOLORE ALDAGARRIAK (LURRA GAIA) --- */
+        :root {
+            --atmosphere: #87CEEB; /* Atmosfera Urdina */
+            --ocean: #1a535c;      /* Ozeano Urdin Sakona */
+            --land: #4a6c42;       /* Lur Berdea */
+            --mantle: #d35400;     /* Magma Laranja */
+            --core: #922b21;       /* Nukleo Gorria */
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-dark: #121212;
+            --accent: #f1c40f;     /* Mineral Horia */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        /* --- NABIGAZIO STICKY --- */
+        #navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 83, 92, 0.95); /* Erdi-gardena */
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span { color: var(--atmosphere); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links li a:hover {
+            color: var(--atmosphere);
+            border-bottom: 2px solid var(--atmosphere);
+        }
+
+        /* Hanburgesa menua mugikorrerako */
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- HERO HEADER --- */
+        .hero {
+            height: 85vh;
+            /* Espazioa eta atmosfera simulatzen dituen gradientea */
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Lurra irudikatzen duen zirkulu dekoratiboa */
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at 30% 30%, #4a6c42, #1a535c);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+            filter: blur(60px);
+        }
+
+        .hero-content {
+            z-index: 1;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-explore {
+            padding: 12px 35px;
+            background: var(--mantle); /* Magma laranja */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(211, 84, 0, 0.4);
+        }
+
+        .btn-explore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.6);
+            background: #e67e22;
+        }
+
+        /* --- LAYOUT UTILITATEAK --- */
+        .section-container {
+            padding: 5rem 10%;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--ocean);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--mantle);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+
+        /* --- IRUDI ERREALENTZAKO ESTILOAK --- */
+        .content-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .content-image:hover {
+            transform: scale(1.01);
+        }
+
+        /* --- TXARTELAK --- */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Esferen kolore espezifikoak */
+        .sphere-card:nth-child(1) { border-color: var(--mantle); } /* Geosfera */
+        .sphere-card:nth-child(2) { border-color: var(--ocean); } /* Hidrosfera */
+        .sphere-card:nth-child(3) { border-color: var(--atmosphere); } /* Atmosfera */
+        .sphere-card:nth-child(4) { border-color: var(--land); } /* Biosfera */
+        
+        .sphere-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+
+        /* --- GEOSFERA GRADIENTE SEKZIOA --- */
+        /* Gainazal hotzetik nukleo berora doan gradiente bisuala */
+        .layer-gradient {
+            background: linear-gradient(180deg, #f0f8ff 0%, #e8f6f3 10%, #fdebd0 40%, #f5b7b1 70%, #d98880 100%);
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            border-radius: 20px;
+            margin: 2rem 5%;
+        }
+
+        .layer-title { color: #2c3e50; }
+
+        .layer-accordion {
+            background: rgba(255,255,255,0.95);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .layer-accordion summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .layer-accordion summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .layer-accordion[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .layer-content {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* Geruzen estilo espezifikoak */
+        .crust summary { border-left: 8px solid var(--land); color: var(--land); }
+        .mantle summary { border-left: 8px solid #e67e22; color: #e67e22; }
+        .outer-core summary { border-left: 8px solid #c0392b; color: #c0392b; }
+        .inner-core summary { border-left: 8px solid #922b21; color: #922b21; }
+
+        .temp-badge {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+
+        /* --- SISMOLOGIA (Bibrazio efektua) --- */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        .wave-card {
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+            cursor: default;
+        }
+
+        .wave-card:hover {
+            animation: shake 0.5s; /* Sagua pasatzean bibrazio efektua */
+            background: #2c3e50;
+        }
+        
+        .wave-card h4 { margin-bottom: 5px; color: var(--accent); }
+
+        .timeline-list {
+            list-style: none;
+            position: relative;
+        }
+        
+        .timeline-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--mantle);
+            position: relative;
+        }
+        
+        .timeline-list li::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--mantle);
+            border-radius: 50%;
+        }
+
+        .depth {
+            display: block;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        /* --- GEODINAMIKA TAB-AK --- */
+        .tabs-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .tabs { 
+            display: flex; 
+            border-bottom: 1px solid #eee;
+            background: #f8f9fa;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 20px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover { background: #eee; }
+        
+        .tab-btn.active { 
+            background: white; 
+            color: var(--ocean); 
+            border-bottom: 3px solid var(--ocean);
+        }
+        
+        .tab-content { 
+            display: none; 
+            padding: 40px; 
+        }
+        
+        .tab-content.active-content { 
+            display: block; 
+            animation: fadeIn 0.5s; 
+        }
+
+        /* --- MATERIALAK (DARK MODE) --- */
+        .dark-theme {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 20px;
+            margin: 2rem 5%;
+        }
+        
+        .dark-theme h2 { color: var(--accent); }
+        .dark-theme p { color: #bdc3c7; }
+
+        /* Arroken akordeoien estilo berriak */
+        .rock-accordion {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+        .rock-accordion:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .rock-accordion summary {
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rock-accordion summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .rock-accordion[open] summary::after {
+            transform: rotate(45deg);
+        }
+        .rock-content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .rock-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        .rock-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Akordeoiko arroka izenburuen kolore espezifikoak */
+        .magma summary { color: #e74c3c; border-left: 5px solid #e74c3c; }
+        .sediment summary { color: #f39c12; border-left: 5px solid #f39c12; }
+        .meta summary { color: #9b59b6; border-left: 5px solid #9b59b6; }
+
+        .mineral-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) #2c3e50;
+        }
+        
+        .mineral-card {
+            min-width: 250px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mineral-card strong { color: var(--accent); display: block; margin-bottom: 5px; font-size: 1.1rem; }
+
+        /* --- HISTORIA TIMELINE --- */
+        .history-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .history-timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--ocean);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .history-card {
+            padding: 20px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .history-card::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--ocean);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left { left: 0; text-align: right;}
+        .right { left: 50%; }
+        .left::after { right: -14px; }
+        .right::after { left: -14px; }
+        
+        .history-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- HIDROSFERA --- */
+        .water-theme {
+            background: linear-gradient(to right, #eaf2f8, #d4e6f1);
+            border-radius: 20px;
+            margin: 2rem 5%;
+        }
+
+        .water-cycle-diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .cycle-step {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: var(--atmosphere);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            width: 80%;
+        }
+        
+        .cycle-arrow { font-size: 20px; color: var(--ocean); }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        /* ANIMAZIOAK */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* MEDIA QUERIES */
+        @media screen and (max-width: 768px) {
+            .nav-links { display: none; }
+            .burger { display: block; } /* Erakutsi menu mugikorra */
+            .hero h1 { font-size: 2.2rem; }
+            .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            
+            .history-timeline::after { left: 31px; }
+            .history-card { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .history-card::after { left: 21px; }
+            .left::after { left: 21px; }
+            .left { text-align: left; }
+            .right { left: 0%; }
+            
+            .section-container { padding: 3rem 5%; }
+            .tabs { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NABIGAZIOA -->
+    <nav id="navbar">
+        <div class="logo">GEO<span>ENCYCLOPEDIA</span></div>
+        <ul class="nav-links">
+            <li><a href="#esferas">Esferak</a></li>
+            <li><a href="#geosfera">Geosfera</a></li>
+            <li><a href="#sismologia">Sismologia</a></li>
+            <li><a href="#dinamica">Geodinamika</a></li>
+            <li><a href="#materiales">Materialak</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#hidrosfera">Hidrosfera</a></li>
+        </ul>
+        <div class="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+    <!-- HERO HEADER -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>LURRA</h1>
+            <p>Egitura, Materialak eta Historia. Bidaia interaktiboa Atmosferatik Barne Nukleoraino.</p>
+            <a href="#esferas" class="btn-explore">Hasi Esplorazioa</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. ESFERAK -->
+        <section id="esferas" class="section-container">
+            <h2>Lau Esferak</h2>
+            
+            <!-- IRUDIA 1: ESFERAK -->
+            <div class="content-image-container">
+                <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/esferak.png" alt="Lurraren Esferak" class="content-image">
+            </div>
+
+            <div class="grid-4">
+                <div class="card sphere-card">
+                    <h3>Geosfera</h3>
+                    <p>Zati solidoa: egitura nagusia osatzen duten arroka, metal eta mineralak.</p>
+                </div>
+                <div class="card sphere-card">
+                    <h3>Hidrosfera</h3>
+                    <p>Ura: ozeanoak, glaziarrak, lurpeko urak eta azaleko urak.</p>
+                </div>
+                <div class="card sphere-card">
+                    <h3>Atmosfera</h3>
+                    <p>Planeta inguratzen duen eta bizitza ahalbidetzen duen zati gaseosoa.</p>
+                </div>
+                <div class="card sphere-card">
+                    <h3>Biosfera</h3>
+                    <p>Planetan bizi diren izaki bizidun guztien multzoa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. GEOSFERA ETA EGITURA -->
+        <section id="geosfera" class="section-container">
+            <h2>Lurraren Barne Egitura</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">
+                Datu sismologikoetan oinarrituta, Lurra dentsitatearen eta tenperaturaren arabera antolatzen da geruzatan.
+            </p>
+
+            <div class="layer-gradient">
+                <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+                    
+                    <!-- IRUDIA 2: GERUZAK -->
+                    <div class="content-image-container">
+                        <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/geruzak.png" alt="Lurraren Geruzak" class="content-image">
+                    </div>
+
+                    <!-- Azala -->
+                    <details class="layer-accordion crust">
+                        <summary>
+                            <span>1. Azala (0 - 70 km)</span>
+                            <span class="temp-badge">-40°C-tik 1000°C-ra</span>
+                        </summary>
+                        <div class="layer-content">
+                            <p>Geruza solido eta hotza. Lurreko elementu kimiko guztiak ditu.</p>
+                            <ul>
+                                <li><strong>Ozeanikoa:</strong> Mehea (7 km inguru).</li>
+                                <li><strong>Kontinentala:</strong> Lodua (35-70 km artean).</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <!-- Goi Mantua -->
+                    <details class="layer-accordion mantle">
+                        <summary>
+                            <span>2. Goi Mantua (~600 km)</span>
+                            <span class="temp-badge">~1000°C</span>
+                        </summary>
+                        <div class="layer-content">
+                            <p>Solidoa baina malgua (plastikoa, pure motakoa) presio txikiagoa dela eta. Lurreko elementu guztiak ditu.</p>
+                        </div>
+                    </details>
+
+                    <!-- Behe Mantua -->
+                    <details class="layer-accordion mantle">
+                        <summary>
+                            <span>3. Behe Mantua (2200 km)</span>
+                            <span class="temp-badge">1727°C (2000K)</span>
+                        </summary>
+                        <div class="layer-content">
+                            <p><strong>Mesosfera:</strong> Oso beroa eta presio handikoa. Solidoa da. Hemen konbekzio-korronteak gertatzen dira.</p>
+                            <div style="background:#fff3e0; padding:10px; margin-top:10px; border-left:4px solid #e67e22;">
+                                <strong>D'' Geruza (D bikoitza):</strong> Nukleoarekiko trantsizio-eremua. Luma termikoak (puntu beroak) sortzen ditu eta kanpo-nukleoa frenatzen/mugitzen laguntzen du.
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Kanpo Nukleoa -->
+                    <details class="layer-accordion outer-core">
+                        <summary>
+                            <span>4. Kanpo Nukleoa (2200 km)</span>
+                            <span class="temp-badge">3727°C (4000K)</span>
+                        </summary>
+                        <div class="layer-content">
+                            <p>Konposizioa: Nikela eta Burdina. <strong>Egoera: Likidoa</strong> (barruan baino presio gutxiago).</p>
+                            <p><strong>Funtzio Bitala:</strong> Bere mugimenduak Lurraren <strong>Eremu Magnetikoa</strong> sortzen du.</p>
+                        </div>
+                    </details>
+
+                    <!-- Barne Nukleoa -->
+                    <details class="layer-accordion inner-core">
+                        <summary>
+                            <span>5. Barne Nukleoa (1200 km)</span>
+                            <span class="temp-badge">5727°C (6000K)</span>
+                        </summary>
+                        <div class="layer-content">
+                            <p>Konposizioa: Nikela eta Burdina. <strong>Egoera: Solidoa</strong>, planetaren pisu osoaren presio itzela dela eta, muturreko tenperatura izan arren.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SISMOLOGIA -->
+        <section id="sismologia" class="section-container">
+            <h2>Sismologia eta Etenuneak</h2>
+            
+            <!-- IRUDIA 3: UHINAK -->
+            <div class="content-image-container">
+                <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/uhinak.png" alt="Uhin Sismikoak" class="content-image">
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="margin-bottom: 1.5rem;">Uhin Sismikoak (Sagua pasatzean bibratzen du)</h3>
+                    <div class="wave-card">
+                        <h4>P Uhinak (Primarioak)</h4>
+                        <p>Longitudinalak. Azkarrenak. Solidoak zeharkatzen dituzte eta likidoetan mantsotu egiten dira.</p>
+                    </div>
+                    <div class="wave-card" style="border-color: #e74c3c;">
+                        <h4>S Uhinak (Sekundarioak)</h4>
+                        <p>Zeharkakoak. Motelagoak. <strong>Likidoetan desagertu egiten dira</strong> (kanpo-nukleoa likidoa dela baieztatzen du).</p>
+                    </div>
+                    <div class="wave-card" style="border-color: #95a5a6;">
+                        <h4>Azaleko Uhinak</h4>
+                        <p><strong>Love:</strong> Zeharkakoak eta suntsitzaileak. <br><strong>Rayleigh:</strong> Mugimendu eliptikoa (biribila).</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="margin-bottom: 1.5rem;">Etenuneak</h3>
+                    <p>Uhinen abiadura bat-batean aldatzen den mugak.</p>
+                    <ul class="timeline-list">
+                        <li>
+                            <span class="depth">8-70 km</span>
+                            <strong>MOHO (Mohorovicic):</strong> Azala / Goi Mantua.
+                        </li>
+                        <li>
+                            <span class="depth">670-1000 km</span>
+                            <strong>Repetti:</strong> Goi Mantua / Behe Mantua.
+                        </li>
+                        <li>
+                            <span class="depth">2900 km</span>
+                            <strong>Gutenberg:</strong> Behe Mantua / Kanpo Nukleoa. (Hemen desagertzen dira S uhinak).
+                        </li>
+                        <li>
+                            <span class="depth">5100 km</span>
+                            <strong>Wiecher-Lehmann:</strong> Kanpo Nukleoa / Barne Nukleoa. (Abiadura igo egiten da berriz, solidoa delako).
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GEODINAMIKA -->
+        <section id="dinamica" class="section-container">
+            <h2>Lurraren Geodinamika</h2>
+            
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'placas')">Plaken Tektonika</button>
+                    <button class="tab-btn" onclick="openTab(event, 'volcanes')">Sumendiak</button>
+                    <button class="tab-btn" onclick="openTab(event, 'deformaciones')">Deformazioak</button>
+                </div>
+
+                <!-- Tab 1: Plakak -->
+                <div id="placas" class="tab-content active-content">
+                    <h3>Plaken Mugimenduak (Wilsonen Zikloa)</h3>
+                    
+                    <!-- IRUDIA 4: PLAKAK -->
+                    <div class="content-image-container">
+                        <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/plakak.png" alt="Plaka Tektonikoak" class="content-image">
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="card">
+                            <h4>Dibergenteak</h4>
+                            <p>Plakak banandu egiten dira. Azal ozeaniko berria sortzen da.</p>
+                            <small>Adib: Ozeano Atlantikoa, Itsaso Gorria.</small>
+                        </div>
+                        <div class="card">
+                            <h4>Konbergenteak</h4>
+                            <p>Plakek talka egiten dute. Azala suntsitu (subduzioa) edo mendikateak sortzen dira.</p>
+                            <small>Adib: Himalaia (K-K), Andeak (O-K), Marianak (O-O).</small>
+                        </div>
+                        <div class="card">
+                            <h4>Eraldatzaileak</h4>
+                            <p>Alboko desplazamendua. Frikzio handia arrokarik sortu edo suntsitu gabe.</p>
+                            <small>Adib: San Andres faila.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Sumendiak -->
+                <div id="volcanes" class="tab-content">
+                    <h3>Bulkanologia</h3>
+                    
+                    <!-- IRUDIA 5: SUMENDIAK -->
+                    <div class="content-image-container">
+                        <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/sumendiak.png" alt="Sumendi Motak" class="content-image">
+                    </div>
+
+                    <p>Laba, gainazalean presioa galtzean desgasifikatutako magma da.</p>
+                    <ul style="margin-top:20px; padding-left:20px; line-height:2;">
+                        <li><strong>Hawaiarra:</strong> Laba oso likidoa, burbuila leunak, ibilbide motza. Leherkortasun txikia.</li>
+                        <li><strong>Estromboliarra:</strong> Ibilbide luzea, laba biskosoagoa. Zipriztinek piroklastoak sortzen dituzte.</li>
+                        <li><strong>Vulkaniarra:</strong> Laba biskosoa, leherketa handiak, suzko hodeiak eta gas toxikoak.</li>
+                        <li><strong>Pliniarra:</strong> Muturreko leherkortasuna. Mendi osoa suntsitu dezake.</li>
+                    </ul>
+                </div>
+
+                <!-- Tab 3: Deformazioak -->
+                <div id="deformaciones" class="tab-content">
+                    <h3>Tolesturak eta Failak</h3>
+                    <div class="grid-2">
+                        <div>
+                            <h4>Tolesturak (Deformazio Plastikoa)</h4>
+                            <ul>
+                                <li><strong>Antiklinala:</strong> "A" forma (konbexua).</li>
+                                <li><strong>Sinklinala:</strong> "U" forma (konkaboa).</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Failak (Haustura)</h4>
+                            <ul>
+                                <li><strong>Normala:</strong> Luzatzeagatik (bloke bat jaisten da).</li>
+                                <li><strong>Alderantzizkoa:</strong> Konpresioagatik (bloke bat igotzen da).</li>
+                                <li><strong>Urratze-faila (Desgarre):</strong> Mugimendu horizontala.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MATERIALAK -->
+        <section id="materiales" class="section-container dark-theme">
+            <h2>Mineralak eta Arrokak</h2>
+            
+            <h3 style="color:var(--accent); margin-bottom:1rem;">Mineralak (Mohs Eskala)</h3>
+            <p style="margin-bottom:1rem;">Gogortasun txikienetik (1) handienera (10) ordenatuta:</p>
+            
+            <div class="mineral-scroll">
+                <div class="mineral-card"><strong>1. Talkoa</strong>Azazkalarekin marratzen da.</div>
+                <div class="mineral-card"><strong>2. Igeltsua</strong>Azazkalarekin marratzen da.</div>
+                <div class="mineral-card"><strong>3. Kaltzita</strong>Kobrearekin hausten da.</div>
+                <div class="mineral-card"><strong>4. Fluorita</strong>Beirarekin hausten da.</div>
+                <div class="mineral-card"><strong>5. Apatitoa</strong>Beirarekin hausten da.</div>
+                <div class="mineral-card"><strong>6. Ortosa</strong>Beira marratzen du.</div>
+                <div class="mineral-card"><strong>7. Kuartzoa</strong>Beira marratzen du.</div>
+                <div class="mineral-card"><strong>8. Topazioa</strong>Beira marratzen du.</div>
+                <div class="mineral-card"><strong>9. Korindoia</strong>Beira marratzen du.</div>
+                <div class="mineral-card"><strong>10. Diamantea</strong>Material gogorrena.</div>
+            </div>
+
+            <br><hr style="border-color:rgba(255,255,255,0.1);"><br>
+
+            <h3 style="color:var(--accent); margin-bottom:1rem;">Arroka Motak</h3>
+            
+            <!-- IRUDIA 6: ARROKAK -->
+            <div class="content-image-container">
+                <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/arrokak.png" alt="Arroken Zikloa" class="content-image">
+            </div>
+
+            <div class="grid-3">
+                
+                <!-- Magmatikoak Akordeoia -->
+                <details class="rock-accordion magma">
+                    <summary>Magmatikoak (Igneoak)</summary>
+                    <div class="rock-content">
+                        <p>Magma hoztean sortzen dira zuzenean. Non hozten diren arabera sailkatzen dira:</p>
+                        <ul>
+                            <li><strong>Bolkanikoak:</strong> Magma kanpora ateratzen da (laba) eta azkar hozten da. Ez du kristal ikusgarririk sortzeko astirik ematen.
+                                <br><em>Adibideak: Basaltoa, Pumita, Riolita.</em></li>
+                            <li><strong>Plutonikoak:</strong> Magma barruan poliki hozten da (batolitoetan). Kristal handi eta ikusgarriak sortzen dira.
+                                <br><em>Adibideak: Granitoa, Sienita.</em></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Sedimentarioak Akordeoia -->
+                <details class="rock-accordion sediment">
+                    <summary>Sedimentarioak</summary>
+                    <div class="rock-content">
+                        <p>Lurrazalean sortzen dira sedimentuen metaketaren ondorioz:</p>
+                        <ul>
+                            <li><strong>Detritikoak:</strong> Beste arroka batzuen zatiak zementu natural baten bidez elkartuta.
+                                <br><em>Adibideak: Konglomeratuak, Hareharriak, Lutitak.</em></li>
+                            <li><strong>Kimikoak:</strong> Uretan disolbatutako substantzien prezipitazioa.
+                                <br><em>Adibideak: Kareharria, Igeltsua, Gatzak (Halita).</em></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Metamorfikoak Akordeoia -->
+                <details class="rock-accordion meta">
+                    <summary>Metamorfikoak</summary>
+                    <div class="rock-content">
+                        <p>Presio eta/edo tenperatura altuengatik eraldatutako arrokak, urtu gabe:</p>
+                        <ul>
+                            <li><strong>Presioagatik (Eskistositatea):</strong>
+                                <ul>
+                                    <li><em>Arbela (Pizarra):</em> Presio baxua.</li>
+                                    <li><em>Eskistoa:</em> Presio ertaina.</li>
+                                    <li><em>Gneisa:</em> Presio eta tenperatura altua (bandak sortzen ditu).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Tenperaturagatik:</strong>
+                                <ul>
+                                    <li><em>Marmola:</em> Kareharritik dator, beroagatik birkristalizatua (bandarik gabe).</li>
+                                    <li><em>Korneanak:</em> Magmaren inguruan.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- 6. HISTORIA -->
+        <section id="historia" class="section-container">
+            <h2>Lurraren Historia</h2>
+            
+            <!-- IRUDIA 7: HISTORIA -->
+            <div class="content-image-container">
+                <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/historia.png" alt="Denbora Lerroa" class="content-image">
+            </div>
+
+            <div class="history-timeline">
+                
+                <!-- Aurrekanbriarra -->
+                <div class="history-card left">
+                    <div class="history-content">
+                        <h3>Aurrekanbriarra (4500 - 541 Ma)</h3>
+                        <p><strong>Hadearra:</strong> Meteorito bonbardaketa, Lurraren eraketa.</p>
+                        <p><strong>Arkearra:</strong> Lehen bakterioak, ur likidoaren jatorria eta oxigenoa.</p>
+                        <p><strong>Proterozoikoa:</strong> Zelula eukariotoak. Rodinia superkontinentea.</p>
+                    </div>
+                </div>
+
+                <!-- Paleozoikoa -->
+                <div class="history-card right">
+                    <div class="history-content">
+                        <h3>Paleozoikoa (541 - 252 Ma)</h3>
+                        <p>Bizitzaren leherketa. Arrainak, anfibioak eta narrastiak. Baso handiak (ikatza).</p>
+                        <p>Pangearen eraketa.</p>
+                        <small>Fosilak: Trilobiteak, Iratzeak.</small>
+                    </div>
+                </div>
+
+                <!-- Mesozoikoa -->
+                <div class="history-card left">
+                    <div class="history-content">
+                        <h3>Mesozoikoa (252 - 66 Ma)</h3>
+                        <p><strong>Dinosauroen</strong> Aroa. Pangearen haustura. Klima beroa.</p>
+                        <p>K-T suntsipen masiboa (Meteoritoa/Bulkanismoa).</p>
+                        <small>Fosilak: Ammoniteak.</small>
+                    </div>
+                </div>
+
+                <!-- Zenozoikoa -->
+                <div class="history-card right">
+                    <div class="history-content">
+                        <h3>Zenozoikoa (66 Ma - Gaur egun)</h3>
+                        <p>Ugaztun eta hegaztien aroa. Hominidoen (Tertziarioa) eta gizakien (Kuaternarioa) agerpena.</p>
+                        <p>Glaziazioak.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. HIDROSFERA -->
+        <section id="hidrosfera" class="section-container water-theme">
+            <h2>Hidrosfera eta Uraren Zikloa</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Uraren Garrantzia</h3>
+                    <ul style="margin-top:20px; padding-left:20px;">
+                        <li>Bero-ahalmen handia (Tenperatura erregulatzen du).</li>
+                        <li>Disolbatzaile unibertsala (garraioa).</li>
+                        <li>Dilatazio anomaloa (izotzak flotatu egiten du, azpiko ur likidoa isolatuz).</li>
+                    </ul>
+                </div>
+                <div class="water-cycle-diagram">
+                    <h4>Uraren Zikloa</h4>
+                    
+                    <!-- IRUDIA 8: URAREN ZIKLOA -->
+                    <div class="content-image-container">
+                        <img src="https://raw.githubusercontent.com/irati-lab/geoikerlariakdbh1/main/uraren%20zikloa.png" alt="Uraren Zikloa" class="content-image">
+                    </div>
+
+                    <p>Motorra: <strong>Eguzkia</strong></p>
+                    <div style="margin-top:20px;">
+                        <div class="cycle-step">1. Lurrunketa</div>
+                        <div class="cycle-arrow">⬇</div>
+                        <div class="cycle-step">2. Kondentsazioa</div>
+                        <div class="cycle-arrow">⬇</div>
+                        <div class="cycle-step">3. Prezipitazioa</div>
+                        <div class="cycle-arrow">⬇</div>
+                        <div class="cycle-step">4. Infiltrazioa / Isurietea</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Encyclopedia Terra &copy; 2023. Iturriak: "Lurraren Egitura" Hezkuntza Dokumentazioa.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Tab-en logika
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active-content");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active-content");
+            }, 10);
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar efektua scroll egitean
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = "0.5rem 5%";
+                navbar.style.background = "rgba(26, 83, 92, 0.98)";
+            } else {
+                navbar.style.padding = "1rem 5%";
+                navbar.style.background = "rgba(26, 83, 92, 0.9)";
+            }
+        });
+
+        // Mugikorreko menuaren toggle-a
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        
+        burger.addEventListener('click', () => {
+            if(nav.style.display === "flex"){
+                nav.style.display = "none";
+            } else {
+                nav.style.display = "flex";
+                nav.style.flexDirection = "column";
+                nav.style.position = "absolute";
+                nav.style.top = "70px";
+                nav.style.right = "0";
+                nav.style.width = "100%";
+                nav.style.background = "var(--ocean)";
+                nav.style.padding = "20px";
+                nav.style.textAlign = "center";
+            }
+        });
+    </script>
+</body>
+</html>
